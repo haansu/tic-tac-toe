@@ -11,6 +11,7 @@ public class Game {
 
     private boolean loop;
     private boolean isXTurn;
+    private byte counter;
     static private ValidEntries[] entries;
 
     private enum ValidEntries {
@@ -23,6 +24,7 @@ public class Game {
         // Initialisation
         isXTurn = true;
         loop = true;
+        counter = 0;
 
         entries = InitialiseEntries();
 
@@ -110,6 +112,7 @@ public class Game {
                 if (loop) {
                     if (entries[_position] == ValidEntries.no) {
                         // Setts button label to the correct entry;
+                        counter++;
                         if (isXTurn) {
                             _buttonArray[_position].setText("X");
                             entries[_position] = ValidEntries.x;
@@ -123,7 +126,7 @@ public class Game {
                         // Checks winning conditions
                         ValidEntries verify = Verify(_position);
 
-                        // If winning conditions are met, winner is displayed and the input will be ignored
+                        // Winning and draw actions
                         if (verify != ValidEntries.no) {
                             System.out.println("The winner is " + verify.toString());
 
@@ -131,6 +134,13 @@ public class Game {
 
                             label.setText(verify.toString().toUpperCase() + " won!");
                             label.setBounds(160, 30, 300, 50);
+                        } else if (counter == 9) {
+                            System.out.println("Draw");
+
+                            loop = false;
+
+                            label.setText("Draw!");
+                            label.setBounds(170, 30, 300, 50);
                         }
                     }
                 }
