@@ -27,7 +27,7 @@ public class Game {
         entries = InitialiseEntries();
 
         // Label configuration
-        int labelFontSize = 50;
+        short labelFontSize = 50;
         Font labelFont = new Font("Courier", Font.BOLD, labelFontSize);
 
         label = new JLabel("Tic Tac Toe");
@@ -42,7 +42,7 @@ public class Game {
         // Button configuration
         tiles = SetButtons();
 
-        for (int i = 0; i < 9; i++) {
+        for (byte i = 0; i < 9; i++) {
             OnButtonsClick(tiles, i);
         }
 
@@ -58,7 +58,7 @@ public class Game {
         ValidEntries[] entry = new ValidEntries[9];
 
         // Initialised with no - this being used as a null like element
-        for(int i = 0; i < 9; i++)
+        for(byte i = 0; i < 9; i++)
             entry[i] = ValidEntries.no;
 
         return entry;
@@ -68,25 +68,25 @@ public class Game {
         JButton[] buttons = new JButton[9];
 
         // This is the debug only text
-        for(int i = 0; i < 9; i++)
+        for(byte i = 0; i < 9; i++)
             if(entries[i] != ValidEntries.no)
                 buttons[i] = new JButton(entries[i].toString() + i);
             else
                 buttons[i] = new JButton("");
 
-        int posX = 10;
-        int posY = 100;
+        short posX = 10;
+        short posY = 100;
 
-        int width = 150;
-        int height = 150;
+        short width = 150;
+        short height = 150;
 
-        for(int i = 0; i < 9; i++) {
+        for(byte i = 0; i < 9; i++) {
             buttons[i].setBounds(posX, posY, width, height);
 
             buttons[i].setBackground(Color.darkGray);
             buttons[i].setForeground(Color.white);
 
-            int size = 100;
+            short size = 100;
             Font buttonFont = new Font("Courier", Font.BOLD, size);
             buttons[i].setFont(buttonFont);
 
@@ -103,7 +103,7 @@ public class Game {
     }
 
     // Handles the event for every button in the array
-    private void OnButtonsClick(JButton[] _buttonArray, int _position) {
+    private void OnButtonsClick(JButton[] _buttonArray, byte _position) {
         _buttonArray[_position].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent _e) {
@@ -138,35 +138,35 @@ public class Game {
         });
     }
 
-    private ValidEntries Verify(int _position) {
+    private ValidEntries Verify(byte _position) {
         boolean win = true;
 
         ValidEntries current;
         current = entries[_position];
 
         // Vertical check
-        for(int i = _position % 3; i < 9; i += 3)
+        for(byte i = (byte) (_position % 3); i < 9; i += 3)
             if(current != entries[i]) {
                 win = false;
                 break;
             }
 
         // Debug only
-        System.out.println("win-vertical: " + win);
+        System.out.println("win-vertical: \t\t\t" + win);
 
         if(win)
             return current;
 
         // Horizontal check
         win = true;
-        for(int i = _position - _position % 3; i <= _position - _position % 3 + 2; i++)
+        for(byte i = (byte) (_position - _position % 3); i <= _position - _position % 3 + 2; i++)
             if(current != entries[i]) {
                 win = false;
                 break;
             }
 
         // Debug only
-        System.out.println("win-horizontal: " + win);
+        System.out.println("win-horizontal: \t\t" + win);
 
         if(win)
             return current;
@@ -176,31 +176,31 @@ public class Game {
 
             // Check First Diagonal
             win = true;
-            for(int i = 0; i < 9; i += 4)
+            for(byte i = 0; i < 9; i += 4)
                 if (current != entries[i]) {
                     win = false;
                     break;
                 }
 
             // Debug only
-            System.out.println("win-first-diagonal: " + win);
+            System.out.println("win-first-diagonal: \t" + win);
 
             if(win)
                 return current;
 
             // Check Second Diagonal
             win = true;
-            for(int i = 2; i < 7; i += 2)
+            for(byte i = 2; i < 7; i += 2)
                 if (current != entries[i]) {
                     win = false;
                     break;
                 }
+
             // Debug only
-            System.out.println("win-second-diagonal: " + win);
+            System.out.println("win-second-diagonal: \t" + win);
 
             if(win)
                 return current;
-
         }
 
         // Returns no (enum arbitrary null-like value)
