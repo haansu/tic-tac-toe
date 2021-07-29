@@ -1,3 +1,4 @@
+package com.haansu.tictactoe;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,6 +41,7 @@ public class Game {
         frame = new JFrame();
         frame.setResizable(false);
         frame.getContentPane().setBackground(Color.BLACK);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Button configuration
         tiles = SetButtons();

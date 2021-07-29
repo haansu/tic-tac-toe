@@ -1,3 +1,4 @@
+package com.haansu.tictactoe;
 import javax.swing.*;
 
 /*| This application is a simple game of Tic Tac Toe that uses a one dimensional |
